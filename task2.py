@@ -20,12 +20,12 @@ def bloki(width, height, im):
                     b_m[now] += 1
                 loc += 1
 
-    plt.plot(r_m, color='red')
-    plt.plot(g_m, color='green')
-    plt.plot(b_m, color='blue')
+    plt.plot(r_m, color='red', label='R')
+    plt.plot(g_m, color='green', label='G')
+    plt.plot(b_m, color='blue', label='B')
     plt.xlabel("оттенок")
     plt.ylabel("количество")
-    # plt.legend()
+    plt.legend()
     plt.show()
 
 
