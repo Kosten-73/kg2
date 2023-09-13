@@ -31,7 +31,7 @@ def bloki(width, height, im):
 
 
 
-im = Image.open("pic.jpg")
+im = Image.open("red.jpg")
 # конвертируем в RGB
 im = im.convert("RGB")
 
