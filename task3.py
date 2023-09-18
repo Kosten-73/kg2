@@ -10,6 +10,9 @@ def on_h_change(value):
     modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
     cv2.imshow('Image', modified_image)
 
+    cv2.imwrite('modified_image.jpg', modified_image)
+
+
 def on_s_change(value):
     image = cv2.imread('picture.jpg')
     image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -20,6 +23,9 @@ def on_s_change(value):
     modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
     cv2.imshow('Image', modified_image)
 
+    cv2.imwrite('modified_image.jpg', modified_image)
+
+
 def on_v_change(value):
     image = cv2.imread('picture.jpg')
     image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -29,6 +35,9 @@ def on_v_change(value):
 
     modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
     cv2.imshow('Image', modified_image)
+
+    cv2.imwrite('modified_image.jpg', modified_image)
+
 
 cv2.namedWindow('Image')
 cv2.createTrackbar('H', 'Image', 0, 179, on_h_change)
