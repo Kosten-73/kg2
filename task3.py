@@ -1,50 +1,43 @@
 import cv2
-from PIL import Image
-from matplotlib import pyplot as plt
-import numpy as np
-def H():
-    image = cv2.imread('pic.jpg')
+
+def on_h_change(value):
+    image = cv2.imread('picture.jpg')
     image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    h = value
 
-    b, g, r = cv2.split(image)
+    image_hsv[:, :, 0] = h
 
-    max_r = np.max(r)
-    max_g = np.max(g)
-    max_b = np.max(b)
+    modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+    cv2.imshow('Image', modified_image)
 
-    max_res = max(max_r, max_g, max_b)
-    min_res = min(max_r, max_g, max_b)
+def on_s_change(value):
+    image = cv2.imread('picture.jpg')
+    image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    s = value
 
-    for y in range(height):
-        for x in range(width):
-            pixel_color = image[y, x]
-            b, g, r = pixel_color
-            loc = 0
-            if loc % 3 == 0:
-                if (max_r == max_res and g >= b):
-                    image_hsv.append(60 * (g - b) / (max_res - min_res))
-                if (max_r == max_res and g < b):
-                    image_hsv.append(60 * (g - b) / (max_res - max_res) + 360)
-                if (max_g == max_res):
-                    image_hsv.append(60 * (b - r) / (max_res - max_res) + 120)
-                if (max_b == max_res):
-                    image_hsv.append(60 * (r - g) / (max_res - max_res) + 240)
-            if loc % 3 == 1:
-                if (max_res == 0):
-                    image_hsv.append(0)
-                else:
-                    image_hsv.append(1-min_res/max_res)
-            if loc % 3 == 2:
-                image_hsv.append(max_res)
-            loc += 1
-    image_hsv.save("test.jpg")
+    image_hsv[:, :, 1] = s
 
+    modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+    cv2.imshow('Image', modified_image)
 
-im = Image.open("pic.jpg")
-# конвертируем в RGB
-im = im.convert("RGB")
+def on_v_change(value):
+    image = cv2.imread('picture.jpg')
+    image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    v = value
 
-# получаем размеры картинок
-width, height = im.size
+    image_hsv[:, :, 2] = value
 
-print(H())
+    modified_image = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+    cv2.imshow('Image', modified_image)
+
+cv2.namedWindow('Image')
+cv2.createTrackbar('H', 'Image', 0, 179, on_h_change)
+cv2.createTrackbar('S', 'Image', 0, 255, on_s_change)
+cv2.createTrackbar('V', 'Image', 0, 255, on_v_change)
+
+while True:
+    key = cv2.waitKey(1)
+    if key == 27:
+        break
+
+cv2.destroyAllWindows()
